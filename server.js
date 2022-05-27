@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const hbs = exphbs.create({ helpers });
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 
@@ -11,13 +12,11 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({ helpers });
 
 const sess = {
-    secret: 'Super secret secret',
-    cookie: {},
-    resave: false,
+    secret: 'MaybeNextTime',
+    cookie: { expires: 20 * 60 * 1000 },
+    resave: true,
     saveUninitialized: true,
     store: new SequelizeStore({
         db: sequelize
