@@ -7,15 +7,14 @@ const seed = async () => {
     await sequelize.sync({ force: true });
     console.log('\n--- DB SYCNED ---\n');
 
-    await seedComments();
-    console.log('\n--- COMMENT SYCNED ---\n');
+    await seedUsers();
+    console.log('\n--- USER SYCNED ---\n');
 
     await seedPosts();
     console.log('\n--- POST SYCNED ---\n');
 
-
-    await seedUsers();
-    console.log('\n--- USER SYCNED ---\n');
+    await seedComments();
+    console.log('\n--- COMMENT SYCNED ---\n');
 
     process.exit(0);
 };
