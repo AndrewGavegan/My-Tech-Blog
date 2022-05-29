@@ -1,4 +1,4 @@
-const router = router('express').Router();
+const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
@@ -21,9 +21,9 @@ router.get('/', async (req, res) => {
     console.log(req.session);
     try {
         const data = await Post.findAll({
-            attributes: ['id', 'name', 'created_at', 'body'],
+            attributes: ['id', 'name', 'body'],
             include: [{
-                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
+                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id'],
                 include: { model: User, attributes: ['username'] }
             },
             { model: User, attributes: ['username'] }]
@@ -42,9 +42,9 @@ router.get('/post/:id', async (req, res) => {
     try {
         const data = await Post.findOne({
             where: { id: req.params.id },
-            attributes: ['id', 'name', 'created_at', 'body'],
+            attributes: ['id', 'name', 'body'],
             include: [{
-                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
+                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id'],
                 include: { model: User, attributes: ['username'] }
             },
             { model: User, attributes: ['username'] }]
