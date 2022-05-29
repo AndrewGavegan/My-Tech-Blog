@@ -16,55 +16,49 @@ router.get('/signup', (req, res) => {
     } res.render('signup');
 });
 
-
-
 // getting all posts with comments and user data on who made the post and comment //
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     console.log(req.session);
-
-    Post.findAll({
-        attributes: ['id', 'name', 'created_at', 'body'],
-        include: [{
-            model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
-            include: { model: User, attributes: ['username'] }
-        },
-        { model: User, attributes: ['username'] }]
-    })
-        .then(data => {
-            const postArray = data.map(post => post.get({ plain: true }));
-            res.render('homepage', { postArray, loggedIn: req.session.loggedIn })
-        }).catch(err => {
-            console.error(err);
-            res.status(500).json(err)
+    try {
+        const data = await Post.findAll({
+            attributes: ['id', 'name', 'created_at', 'body'],
+            include: [{
+                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
+                include: { model: User, attributes: ['username'] }
+            },
+            { model: User, attributes: ['username'] }]
         });
+        const postArray = data.map(post =>
+            post.get({ plain: true }));
+        res.render('homepage', { postArray, loggedIn: req.session.loggedIn })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err)
+    };
 });
 
 // getting one post from post id //
-router.get('/post/:id', (req, res) => {
-    Post.findOne({
-        where: { id: req.params.id },
-        attributes: ['id', 'name', 'created_at', 'body'],
-        include: [{
-            model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
-            include: { model: User, attributes: ['username'] }
-        },
-        { model: User, attributes: ['username'] }]
-    })
-        .then(data => {
-            if (!data) {
-                res.status(404).json({ message: 'No post has this id' });
-                return;
-            }
-            const post = data.get({ plain: true });
-            res.render('onePost', {
-                post,
-                loggedIn: req.session.loggedIn
-            });
+router.get('/post/:id', async (req, res) => {
+    try {
+        const data = await Post.findOne({
+            where: { id: req.params.id },
+            attributes: ['id', 'name', 'created_at', 'body'],
+            include: [{
+                model: Comment, attributes: ['id', 'body', 'post_id', 'user_id', 'created_at'],
+                include: { model: User, attributes: ['username'] }
+            },
+            { model: User, attributes: ['username'] }]
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+        if (!data) {
+            res.status(404).json({ message: 'No post has this id' });
+            return;
+        }
+        const post = data.get({ plain: true });
+        res.render('onePost', { post, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 module.exports = router;
