@@ -3,9 +3,24 @@ const { User, Post, Comment } = require('../../models');
 // linking to authentifictaion middleware that was set up in utils folder //
 const withAuth = require('../../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const data = await User.findAll({ attributes: { exclude: ['password'] } })
+        const data = await User.findAll({
+            attributes: { exclude: ['password'] },
+            include: [
+                {
+                    model: Post,
+                    attributes: ['id', 'name', 'body']
+                },
+                {
+                    model: Comment,
+                    attributes: ['id', 'body'],
+                    include: {
+                        model: Post,
+                        attributes: ['name']
+                    }
+                }]
+        })
         res.json(data);
     } catch (err) {
         res.status(500).json(err);
