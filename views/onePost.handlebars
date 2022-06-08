@@ -1,0 +1,17 @@
+{{>techpost post}}
+
+{{#if loggedIn}}
+<form>
+    <div class="form-group">
+        <textarea class="form-control" id="commentText" rows="3" placeholder="Write a comment"></textarea>
+    </div>
+    <div class="btn btn-sm" type="submit">
+        Comment
+    </div>>
+</form>
+{{/if}}
+
+{{comments post.comments}}
+{{#if loggedIn}}
+<script src="../public/comment.js"></script>
+{{/if}}

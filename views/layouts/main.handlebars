@@ -20,11 +20,14 @@
             <div class="row flex-nowrap justify-content-beginning align-items-center">
                 <div class="col-8 pt-1">
                     <a class="btn btn-sm" href="index.html">Technotizing</a>
-                    <a class="btn btn-sm" href="about.html">Dashboard</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-sm" href="post.html">Login</a>
-                    <a class="btn btn-sm" href="contact.html">Signup</a>
+                    {{#if loggedIn}}
+                    <a class="btn btn-sm" href="/user/{{userId}}">{{userName}}</a>
+                    <a class="btn btn-sm" id="logoutBtn">Logout</a>
+                    {{else}}
+                    <a class="btn btn-sm" href="/login">Login</a>
+                    <a class="btn btn-sm" href="/signup">Signup</a>
                 </div>
             </div>
         </div>
