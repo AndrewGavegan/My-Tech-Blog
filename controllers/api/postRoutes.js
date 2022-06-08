@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         const data = await Post.findAll({
             attributes: [
                 'id',
-                'title',
+                'name',
                 'body'
             ],
             order: [['id', 'DESC']],
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
             },
             attributes: [
                 'id',
-                'title',
+                'name',
                 'body'
             ],
             include: [
