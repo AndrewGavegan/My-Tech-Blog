@@ -4,7 +4,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "seed": "node seeds/seed.js"
+    "seed": "node seeds/seed.js",
+    "lint": "npx eslint **/*.js",
+    "lintfix": "npx eslint **/*.js --fix"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
