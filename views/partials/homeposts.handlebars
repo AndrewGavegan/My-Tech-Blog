@@ -1,11 +1,13 @@
-<div class="card mb-6">
-    <header class="card-header">
-        <div class="col">
-            <p class="card-text"><a href="/post/{{id}}" class="btn btn-sm">{{name}}</a></p>
+<div class="container">
+    <div class="card mb-6" style="margin-bottom: 30px; border-radius: 0px 40px 40px 0px;">
+        <header class="card-header" style="border-radius: 0px 40px 0px 0px;">
+            <div class="col">
+                <p class="card-text"><a href="/post/{{id}}" class="btn btn-sm">{{name}}</a></p>
+            </div>
+        </header>
+        <div class="card-body">
+            <div class="card-text">{{body}}</div>
+            <div class="card-body"> Author: {{user.username}}</div>
         </div>
-    </header>
-    <div class="card-body">
-        <div class="card-text">{{body}}</div>
-        <div class="card-body">{{user_id}}</div>
     </div>
 </div>
