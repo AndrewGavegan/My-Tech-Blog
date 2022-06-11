@@ -19,17 +19,29 @@ router.get('/signup', (req, res) => {
 router.get('/', async (req, res) => {
   console.log(req.session);
   try {
-    const data = await Post.findAll({
-      attributes: ['id', 'name', 'body'],
+    const postData = await Post.findAll({
       include: [{
-        model: Comment, attributes: ['id', 'body', 'post_id', 'user_id'],
-        include: { model: User, attributes: ['username'] }
-      },
-      { model: User, attributes: ['username'] }]
+        model: User
+      }],
+      group: ['id']
     });
-    const postArray = data.map(post =>
-      post.get({ plain: true }));
-    res.render('homepage', { postArray, loggedIn: req.session.loggedIn });
+
+    const posts = postData.map(post => post.get({ plain: true }));
+
+    const commentData = await Comment.findAll({
+      attributes: ['name', 'body']
+    });
+
+    const comments = commentData.map(post => post.get({ plain: true }));
+
+
+    res.render('homepage', {
+      posts,
+      comments,
+      userId: req.session.user_id,
+      userName: req.session.name,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
