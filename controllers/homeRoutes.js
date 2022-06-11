@@ -61,7 +61,7 @@ router.get('/post/:id', async (req, res) => {
       res.status(404).json({ message: 'No post has this id' });
       return;
     }
-    const posts = postData.map(post => post.get({ plain: true }));
+    const posts = postData.get({ plain: true });
 
     res.render('onepost', {
       posts,
