@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 // linking to authentifictaion middleware that was set up in utils folder //
 const withAuth = require('../utils/auth');
@@ -49,7 +48,7 @@ router.get('/update/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/update/:id', withAuth, async (req, res) => {
+router.get('/new/:id', withAuth, async (req, res) => {
   try {
     const data = await Post.findAll({
       where: { user_id: req.session.user_id },

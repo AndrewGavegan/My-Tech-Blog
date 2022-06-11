@@ -1,0 +1,16 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Posts<h1>
+        </div>
+    </div>
+    <div class="container posts">
+        <div class="row mb-2 ">
+            {{#each posts as |post|}}
+            {{> techpost post}}
+        </div>
+        <a href="/dashboard/update/{{post.id}}"><button class="btn btn-sm">Update</button></a>
+        {{/each}}
+    </div>
+
+</section>
