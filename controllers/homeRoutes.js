@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
     const posts = postData.map(post => post.get({ plain: true }));
 
     const commentData = await Comment.findAll({
-      attributes: ['name', 'body']
+      attributes: ['body']
     });
 
     const comments = commentData.map(post => post.get({ plain: true }));

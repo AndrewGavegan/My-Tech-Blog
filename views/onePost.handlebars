@@ -1,4 +1,4 @@
-{{>techpost post}}
+{{>homeposts}}
 
 {{#if loggedIn}}
 <form>
@@ -10,8 +10,7 @@
     </div>>
 </form>
 {{/if}}
-
-{{comments post.comments}}
+{{> comments post.comments}}
 {{#if loggedIn}}
 <script src="../public/comment.js"></script>
 {{/if}}
