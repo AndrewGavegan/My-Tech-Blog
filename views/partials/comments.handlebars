@@ -1,6 +1,8 @@
-<div class="comment card">
+<div class="container">
     {{#each this}}
-    <div>{{user.username}}</div>
-    <div>{{body}}</div>
+    <div class="comment card">
+        <div class="card-header">{{user.username}}</div>
+        <div class="card-body">{{body}}</div>
+    </div>
     {{/each}}
 </div>
