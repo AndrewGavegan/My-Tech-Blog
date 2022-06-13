@@ -5,10 +5,8 @@
         </div>
     </div>
     <div class="container posts">
-        <div class="row mb-2 ">
-            {{#each posts as |post|}}
-            {{> techpost post}}
-        </div>
+        {{#each user.posts as |post|}}
+        {{>dashposts}}
         <a href="/dashboard/update/{{post.id}}"><button class="btn btn-sm">Update</button></a>
         {{/each}}
     </div>

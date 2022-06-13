@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 // dashboard route dashboard //
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findOne({
       attributes: { exclude: ['password'] },
@@ -37,21 +37,17 @@ router.get('/:id', withAuth, async (req, res) => {
       },
       include: [
         {
-          model: Post,
-          include: {
-            model: Comment,
-            attributes: ['body']
-          }
+          model: Post
         }]
     });
-
-    const data = userData.get({ plain: true });
-    if (!data) {
+    const user = userData.get({ plain: true });
+    console.log(user);
+    if (!user) {
       res.status(404).json({ message: 'No user has this ID' });
       return;
     }
     res.render('dashboard', {
-      data,
+      user,
       userId: req.session.user_id,
       userName: req.session.name,
       loggedIn: req.session.loggedIn,

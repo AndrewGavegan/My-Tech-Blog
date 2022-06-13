@@ -2,18 +2,18 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
 // using redirect to make sure people who arent currently logged in get sent to signup or login pages //
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  } res.render('login');
-});
-router.get('/signup', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  } res.render('signup');
-});
+// router.get('/login', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/');
+//     return;
+//   } res.render('login');
+// });
+// router.get('/signup', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/');
+//     return;
+//   } res.render('signup');
+// });
 
 // getting all posts with comments and user data on who made the post and comment //
 router.get('/', async (req, res) => {
