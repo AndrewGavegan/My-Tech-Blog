@@ -7,7 +7,7 @@ const signUpSubmit = async (e) => {
 
     if (name && email && password) {
         // create a post request with the details entered
-        const res = await fetch('/api/users', {
+        const res = await fetch('/api/users/', {
             method: 'POST',
             body: JSON.stringify({ name, email, password }),
             headers: { 'Content-Type': 'application/json' },
