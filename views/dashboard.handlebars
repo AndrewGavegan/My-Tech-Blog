@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="container posts">
-        {{#each user.posts as |post|}}
+        {{#each posts as |post|}}
         {{>dashposts}}
         <a href="/dashboard/update/{{post.id}}"><button class="btn btn-sm">Update</button></a>
         {{/each}}
