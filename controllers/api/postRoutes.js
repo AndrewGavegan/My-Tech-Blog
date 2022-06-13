@@ -36,14 +36,14 @@ router.get('/', async (req, res) => {
 
 
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const data = await Post.create({
+    const postData = await Post.create({
       name: req.body.name,
-      body: req.body.body,
+      body: req.body.content,
       user_id: req.session.user_id
     });
-    res.json(data);
+    res.status(200).json(postData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -52,7 +52,7 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
   try {
-    const data = await Post.update({
+    const postUpdate = await Post.update({
       name: req.body.name,
       body: req.body.body
     },
@@ -61,10 +61,10 @@ router.put('/:id', withAuth, async (req, res) => {
           id: req.params.id
         }
       });
-    if (!data) {
+    if (!postUpdate) {
       res.status(404).json({ message: 'No post has this ID' });
       return;
-    } res.json(data);
+    } res.json(postUpdate);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -73,15 +73,15 @@ router.put('/:id', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const data = await Post.destroy({
+    const deletePost = await Post.destroy({
       where: {
         id: req.params.id
       }
     });
-    if (!data) {
+    if (!deletePost) {
       res.status(404).json({ message: 'No post has this ID' });
       return;
-    } res.json(data);
+    } res.json(deletePost);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
