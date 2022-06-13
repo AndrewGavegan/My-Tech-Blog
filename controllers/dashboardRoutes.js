@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/new', async (req, res) => {
+router.get('/new', withAuth, async (req, res) => {
     try {
         const postData = await Post.findAll({
             where: {
@@ -76,6 +76,45 @@ router.get('/new', async (req, res) => {
             userName: req.session.name,
             loggedIn: req.session.loggedIn
         })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.get('/update/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: [
+                'id',
+                'name',
+                'body'
+            ],
+            order: [['id', 'DESC']],
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'body', 'post_id', 'user_id'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+            ]
+        });
+        const posts = postData.get({ plain: true });
+        res.render('update', {
+            posts,
+            userId: req.session.user_id,
+            userName: req.session.name,
+            loggedIn: req.session.loggedIn
+        });
     } catch (err) {
         res.status(500).json(err);
     }
