@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>New Post</h1>
+    <h1>Update Post</h1>
     <form class="update-form">
         <div class="form-group">
             <label for="postName">Post Title:</label>
@@ -9,8 +9,10 @@
             <label for="postBody">Post:</label>
             <input class="form-control" name="postBody" id="postBody" type="text" value="{{post.body}}"></input>
         </div>
-        <button class="btn btn-sm" type="submit">Update!</button>
+        <button class="btn btn-primary" type="submit">Update</button>
+        <button id="deleteBtn" class="btn btn-secondary" type="button">Delete Post</button>
     </form>
 </div>
 
+<script src="../../delete.js"></script>
 <script src="../../update.js"></script>
