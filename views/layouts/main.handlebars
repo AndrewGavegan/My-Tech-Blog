@@ -24,9 +24,8 @@
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     {{#if loggedIn}}
-                    <a class="btn btn-sm" href="/api/users/{{userId}}">My Dashboard</a>
+                    <a class="btn btn-sm" href="/dashboard">My Dashboard</a>
                     <a class="btn btn-sm" id="logoutBtn" style="cursor: pointer;">Logout</a>
-                    <a class="btn btn-sm" href="/create/">New Post</a>
                     {{else}}
                     <a class="btn btn-sm" href="/login">Login</a>
                     <a class="btn btn-sm" href="/signup">Signup</a>
