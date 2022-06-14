@@ -9,10 +9,10 @@
         <button class="btn btn-primary" type="submit">Comment</button>
     </form>
     {{/if}}
-    <div class="container">
-        {{> comments post.comments}}
-    </div>
-    {{#if loggedIn}}
-    <script src="../../comment.js"></script>
-    {{/if}}
 </div>
+<div class="container">
+    {{> comments post.comments}}
+</div>
+{{#if loggedIn}}
+<script src="../../comment.js"></script>
+{{/if}}
