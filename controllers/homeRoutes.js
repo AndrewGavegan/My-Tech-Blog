@@ -63,18 +63,13 @@ router.get('/post/:id', async (req, res) => {
     });
     const post = postData.get({ plain: true });
     console.log(post);
-    if (!post) {
-      res.status(404).json({ message: 'No post has this id' });
-      return;
-    } else {
 
-      res.render('onepost', {
-        post,
-        userId: req.session.user_id,
-        userName: req.session.name,
-        loggedIn: req.session.loggedIn
-      })
-    };
+    res.render('singlepost', {
+      post,
+      userId: req.session.user_id,
+      userName: req.session.name,
+      loggedIn: req.session.loggedIn
+    })
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
