@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const data = await Comment.create({ body: req.body.body, post_id: req.body.post_id, user_id: req.session.user_id });
+    const data = await Comment.create({ user_id: req.session.user_id, post_id: req.body.post_id, body: req.body.content });
     if (req.session) {
       res.status(200).json(data);
     } res.status(400).json({ message: 'no session' });

@@ -1,18 +1,18 @@
 async function addCommentHandle(e) {
     e.preventDefault();
 
-    //must use same name that you said you would search for in the router, eg body and body, or content and content, I forget this everytime!!!!
-    const body = document.querySelector('#commentText').value.trim();
+    // use same name that you said you would search for in the router, eg body and body, or content and content I feel like this is why i always get errors!!!!
+    const content = document.querySelector('#commentText').value.trim();
     // copy from update.js, method for grabbing post id from the url //
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1];
 
-    if (body) {
+    if (content) {
         const res = await fetch('/api/comments', {
             method: 'POST',
             body: JSON.stringify({
                 post_id,
-                body
+                content
             }),
             headers: { 'Content-Type': 'application/json' }
         });
