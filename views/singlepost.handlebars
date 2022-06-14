@@ -10,8 +10,12 @@
     </form>
     {{/if}}
 </div>
-<div class="container">
-    {{> comments post.comments}}
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {{> comments post.comments}}
+        </div>
+    </div>
 </div>
 {{#if loggedIn}}
 <script src="../../comment.js"></script>
