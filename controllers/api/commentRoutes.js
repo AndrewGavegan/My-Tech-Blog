@@ -12,19 +12,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const data = await Comment.create({ user_id: req.session.user_id, post_id: req.body.post_id, body: req.body.content });
-    if (req.session) {
-      res.status(200).json(data);
-    } res.status(400).json({ message: 'no session' });
+    const commentData = await Comment.create({
+      user_id: req.session.user_id,
+      post_id: req.body.post_id,
+      body: req.body.content
+    });
+    res.status(200).json(commentData);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const data = await Comment.destroy({ where: { id: req.params.id } });
     if (!data) {

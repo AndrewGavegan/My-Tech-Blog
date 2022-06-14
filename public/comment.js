@@ -6,7 +6,6 @@ async function addCommentHandle(e) {
     // copy from update.js, method for grabbing post id from the url //
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1];
-
     if (content) {
         const res = await fetch('/api/comments', {
             method: 'POST',
@@ -21,7 +20,10 @@ async function addCommentHandle(e) {
         } else {
             alert(res.statusText);
         }
+    } else {
+        alert(`enter a comment before trying to add one!`)
     }
 }
+
 
 document.querySelector('.comment-form').addEventListener('submit', addCommentHandle);
