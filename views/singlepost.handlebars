@@ -2,16 +2,16 @@
     {{> homeposts post}}
 
     {{#if loggedIn}}
-    <form>
+    <form class="comment-form">
         <div class="form-group">
-            <textarea class="form-control" id="commentText" rows="3" placeholder="Write a comment"></textarea>
+            <textarea class="form-control" id="commentText" rows="3" placeholder="Comment on this post"></textarea>
         </div>
-        <div class="btn btn-sm" type="submit">
-            Comment
-        </div>
+        <button class="btn btn-primary" type="submit">Comment</button>
     </form>
     {{/if}}
-    {{> comments post.comments}}
+    <div class="container">
+        {{> comments post.comments}}
+    </div>
     {{#if loggedIn}}
     <script src="../../comment.js"></script>
     {{/if}}
