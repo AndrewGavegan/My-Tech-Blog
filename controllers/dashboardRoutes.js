@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
                 'name',
                 'body'
             ],
-            order: [['id', 'DESC']],
+            order: [['id', 'ASC']],
             include: [
                 {
                     model: Comment,
@@ -53,7 +53,7 @@ router.get('/new', withAuth, async (req, res) => {
                 'name',
                 'body'
             ],
-            order: [['id', 'DESC']],
+            order: [['id', 'ASC']],
             include: [
                 {
                     model: Comment,
@@ -92,7 +92,7 @@ router.get('/update/:id', withAuth, async (req, res) => {
                 'name',
                 'body'
             ],
-            order: [['id', 'DESC']],
+            order: [['id', 'ASC']],
             include: [
                 {
                     model: Comment,

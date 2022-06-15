@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create({
       user_id: req.session.user_id,
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const data = await Comment.destroy({ where: { id: req.params.id } });
     if (!data) {
