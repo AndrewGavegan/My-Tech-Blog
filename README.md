@@ -20,7 +20,7 @@ Packages that are used in this application are dotenv, for storing authentificic
 
 ---
 ## Deployment
-Check out technotizing at `https://technotizing.herokuapp.com/`!
+Check out technotizing at https://technotizing.herokuapp.com/!
 
 ---
 ## Usage 
